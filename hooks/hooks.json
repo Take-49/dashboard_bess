@@ -3,6 +3,17 @@
   "hooks": {
     "PreToolUse": [
       {
+        "matcher": "Write|Edit|MultiEdit|NotebookEdit",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "node scripts/hooks/user-approval-reminder.js"
+          }
+        ],
+        "description": "Remind that user approval is required before creating or modifying files",
+        "id": "pre:write-edit:user-approval-reminder"
+      },
+      {
         "matcher": "Bash",
         "hooks": [
           {

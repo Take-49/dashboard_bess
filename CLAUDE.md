@@ -9,6 +9,15 @@ This is a **Battery Energy Storage System (BESS) dashboard** project with integr
 - **data/** - CSV data files from BESS logger (dispatch logs, alarms, performance metrics, SOE events, user logs)
 - **DESIGN.md** - UI design guidelines (Apple Japan style). **Must be referenced for all UI/frontend development.**
 
+## User Approval Policy
+
+実装・変更作業を行う前に、必ずユーザーの承認を得ること。これは最優先ルールである。
+
+- **承認が必要**: 技術スタック・フレームワークの選定、新規ファイルの作成・コード実装、設計変更・アーキテクチャ決定、パッケージのインストール、git push
+- **承認不要**: 調査・分析・ファイル読み取り、質問への回答、git status/log/diff 等の参照コマンド
+- **手順**: 計画または選択肢を提示 → ユーザーの明示的な承認を待つ → 実装開始
+- **禁止**: 承認なしにコードを書き始めること、承認なしに方針を決定すること
+
 ## Design Guidelines
 
 When working on UI, frontend, or any visual component:
