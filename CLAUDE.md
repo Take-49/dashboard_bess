@@ -4,7 +4,18 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Project Overview
 
-This is a **Claude Code plugin** - a collection of production-ready agents, skills, hooks, commands, rules, and MCP configurations. The project provides battle-tested workflows for software development using Claude Code.
+This is a **Battery Energy Storage System (BESS) dashboard** project with integrated Claude Code plugin configurations. The dashboard visualizes logger data from a grid-connected battery storage system.
+
+- **data/** - CSV data files from BESS logger (dispatch logs, alarms, performance metrics, SOE events, user logs)
+- **DESIGN.md** - UI design guidelines (Apple Japan style). **Must be referenced for all UI/frontend development.**
+
+## Design Guidelines
+
+When working on UI, frontend, or any visual component:
+
+1. **Always read `DESIGN.md` first** before implementing any UI changes
+2. Follow the design specifications defined in `DESIGN.md` for typography, colors, spacing, and layout
+3. When spawning subagents for UI work, include the DESIGN.md conventions in the agent's prompt
 
 ## Running Tests
 
