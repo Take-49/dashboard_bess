@@ -408,8 +408,11 @@ elif page == "アラーム・イベント":
                     showlegend=i == 0,
                     hovertext=f"{row['Alarm Name']}<br>{row['Generation time']} ~ {row['End time']}",
                 ))
-            fig.update_layout(**PLOTLY_LAYOUT, height=max(300, len(alarm) * 35),
-                               yaxis=dict(categoryorder="total ascending"))
+            layout_kwargs = {**PLOTLY_LAYOUT, "height": max(300, len(alarm) * 35)}
+            layout_kwargs["yaxis"] = dict(
+                gridcolor="rgba(0,0,0,0.06)", categoryorder="total ascending"
+            )
+            fig.update_layout(**layout_kwargs)
             st.plotly_chart(fig, use_container_width=True)
 
         st.dataframe(
