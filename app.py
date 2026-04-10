@@ -396,23 +396,27 @@ elif page == "アラーム・イベント":
         # Gantt-style timeline
         if not alarm.empty:
             st.subheader("アラームタイムライン")
-            fig = go.Figure()
-            for i, row in alarm.iterrows():
-                color = "#ff3b30" if row["Severity"] == "Major" else "#ff9500"
-                fig.add_trace(go.Scatter(
-                    x=[row["Generation time"], row["End time"]],
-                    y=[row["Alarm Name"], row["Alarm Name"]],
-                    mode="lines",
-                    line=dict(color=color, width=12),
-                    name=row["Severity"],
-                    showlegend=i == 0,
-                    hovertext=f"{row['Alarm Name']}<br>{row['Generation time']} ~ {row['End time']}",
-                ))
-            layout_kwargs = {**PLOTLY_LAYOUT, "height": max(300, len(alarm) * 35)}
-            layout_kwargs["yaxis"] = dict(
-                gridcolor="rgba(0,0,0,0.06)", categoryorder="total ascending"
+            gantt_df = alarm[["Alarm Name", "Generation time", "End time", "Severity", "SN"]].copy()
+            gantt_df = gantt_df.rename(columns={
+                "Alarm Name": "Alarm",
+                "Generation time": "Start",
+                "End time": "Finish",
+            })
+            gantt_df = gantt_df.sort_values("Start")
+
+            fig = px.timeline(
+                gantt_df, x_start="Start", x_end="Finish", y="Alarm",
+                color="Severity",
+                color_discrete_map={"Major": "#ff3b30", "Warning": "#ff9500"},
+                hover_data={"SN": True, "Severity": True},
             )
-            fig.update_layout(**layout_kwargs)
+            fig.update_traces(marker_line_width=0)
+            fig.update_layout(
+                **PLOTLY_LAYOUT,
+                height=500,
+                yaxis_title="",
+                legend=dict(orientation="h", y=1.08),
+            )
             st.plotly_chart(fig, use_container_width=True)
 
         st.dataframe(
